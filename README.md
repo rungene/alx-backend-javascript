@@ -7,3 +7,7 @@
 ## 0x01. ES6 Promises
 
 **JavaScript ES6**
+
+## 0x02. ES6 classes
+
+**OOP JavaScript ES6**
