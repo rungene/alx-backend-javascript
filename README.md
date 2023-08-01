@@ -11,3 +11,7 @@
 ## 0x02. ES6 classes
 
 **OOP JavaScript ES6**
+
+## 0x03. ES6 data manipulation
+
+**JavaScript ES6**
