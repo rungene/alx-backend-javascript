@@ -7,6 +7,5 @@ export default function createInt8TypedArray(length, position, value) {
   } else {
     console.error('Position outside range');
   }
-
   return dataView;
 }
