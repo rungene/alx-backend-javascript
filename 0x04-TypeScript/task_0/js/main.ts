@@ -25,27 +25,27 @@ const student2: Student = new StudentClass('Clevers', 'Kiprotich', 25, 'Lagos');
 const studentsList: Student[] = [student1, student2];
 
 const table: HTMLTableElement = document.createElement('table');
-document.body.appendChild(tb);
+document.body.appendChild(table);
 
-let thead: HTMLTableElement = tb.createTHead();
-let trow: HTMLTableElement = thead.insertRow();
+let thead: HTMLTableElement = table.createTHead();
+let trow: HTMLTableRowElement = thead.insertRow();
 let data = Object.keys(studentsList[0]);
 delete data.lastName;
-delete data.age
+delete data.age;
 
 for (let key of data) {
   let th = document.createElement('th');
-  let text: string = document.createTextNode(key);
+  let text = document.createTextNode(key);
   th.appendChild(text);
   trow.appendChild(th);
 }
 const keySkip = ['lastName', 'age'];
 
 for (let element of studentsList) {
-  let row: HTMLTableElement = table.insertRow();
+  let row: HTMLTableRowElement = table.insertRow();
   for (key in element) {
     if (!keySkip.includes(key)) {
-      let cell: HTMLTableElement = row.insertCell();
+      let cell: HTMLTableCellElement = row.insertCell();
       let text = document.createTextNode(element[key]);
       cell.appendChild(text);
     }
