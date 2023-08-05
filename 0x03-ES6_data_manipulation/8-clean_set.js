@@ -1,9 +1,12 @@
 export default function cleanSet(set, startString) {
+  if (!startString || typeof set !== 'object' || typeof startString !== 'string') {
+    return '';
+  }
   let result = '';
 
   set.forEach((element) => {
     if (element.startsWith(startString)) {
-      result += element.substring(startString.length) + '-';
+      result += `${element.substring(startString.length)}-`;
     }
   });
   // if not an empty set remove the last undescore from the result
