@@ -8,7 +8,7 @@ function countStudents(filePath) {
     const lines = data.split('\n').slice(1);
     for (let i = 0; i < lines.length; i += 1) {
       const line = lines[i].trim();
-      const words = line.split(' ');
+      const words = line.split(',');
       if (words.length > 0) {
         const lastWord = words[words.length - 1];
         if (lastWord === 'CS') {
