@@ -21,10 +21,10 @@ function countStudents(filePath) {
     const totalStudents = sweCount.length + csCount.length;
     console.log(`Number of students: ${totalStudents}`);
     if (csCount.length > 0) {
-      console.log(`Number of students in CS: ${csCount.length} List: ${csCount.join(', ')}`);
+      console.log(`Number of students in CS: ${csCount.length}. List: ${csCount.join(', ')}`);
     }
     if (sweCount.length > 0) {
-      console.log(`Number of students in SWE: ${sweCount.length} List: ${sweCount.join(', ')}`);
+      console.log(`Number of students in SWE: ${sweCount.length}. List: ${sweCount.join(', ')}`);
     }
   } catch (error) {
     throw new Error('Cannot load the database');
