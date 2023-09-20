@@ -6,46 +6,47 @@ const port = 1245;
 
 const app = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
-  
+
   if (req.method === 'GET') {
     if (req.url === '/') {
       res.statusCode = 200;
-      res.end('Hello Holberton School!');
+      res.end('Hello Holberton School!\n'); // Add '\n' for newline
     } else if (req.url === '/students') {
-        res.write('This is the list of our students\n');
-        fs.readFile(process.argv[2], 'utf-8', (err, data) => {
-          if (err) {
-            res.statusCode = 500;
-            res.end('Cannot load the database');
-          } else {
-            res.statusCode = 200;
-            const sweCount = [];
-            const csCount = [];
-            const lines = data.split('\n').slice(1);
-            for (let i = 0; i < lines.length; i += 1) {
-              const line = lines[i].trim();
-              const words = line.split(',');
-              if (words.length > 0) {
-                const lastWord = words[words.length - 1];
-                if (lastWord === 'CS') {
-                  csCount.push(words[0]);
-                } else if (lastWord === 'SWE') {
-                  sweCount.push(words[0]);
-               }
+      res.write('This is the list of our students\n');
+      fs.readFile(process.argv[2], 'utf-8', (err, data) => {
+        if (err) {
+          res.statusCode = 500;
+          res.end('Cannot load the database\n'); // Add '\n' for newline
+        } else {
+          res.statusCode = 200;
+          const sweCount = [];
+          const csCount = [];
+          const lines = data.split('\n').slice(1);
+          for (let i = 0; i < lines.length; i += 1) {
+            const line = lines[i].trim();
+            const words = line.split(',');
+            if (words.length > 0) {
+              const lastWord = words[words.length - 1];
+              if (lastWord === 'CS') {
+                csCount.push(words[0]);
+              } else if (lastWord === 'SWE') {
+                sweCount.push(words[0]);
               }
             }
-            const totalStudents = sweCount.length + csCount.length;
-            res.write(`Number of students: ${totalStudents}\n`);
-            if (csCount.length > 0) {
-              res.write(`Number of students in CS: ${csCount.length}. List: ${csCount.join(', ')}\n`);
-            }
-            if (sweCount.length > 0) {
-              res.write(`Number of students in SWE: ${sweCount.length}. List: ${sweCount.join(', ')}`);
-            }
-            res.end();
           }
+          const totalStudents = sweCount.length + csCount.length;
+          res.write(`Number of students: ${totalStudents}\n`); // Add '\n' for newline
+          if (csCount.length > 0) {
+            res.write(`Number of students in CS: ${csCount.length}. List: ${csCount.join(', ')}\n`); // Add '\n' for newline
+          }
+          if (sweCount.length > 0) {
+            res.write(`Number of students in SWE: ${sweCount.length}. List: ${sweCount.join(', ')}\n`); // Add '\n' for newline
+          }
+          res.end();
+        }
       });
     }
+  }
 });
 
 app.listen(port, hostname, () => {
