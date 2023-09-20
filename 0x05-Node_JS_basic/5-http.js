@@ -19,33 +19,33 @@ const app = http.createServer((req, res) => {
             res.end('Cannot load the database');
           } else {
             res.statusCode = 200;
-          const sweCount = [];
-          const csCount = [];
-          const lines = data.split('\n').slice(1);
-          for (let i = 0; i < lines.length; i += 1) {
-            const line = lines[i].trim();
-            const words = line.split(',');
-            if (words.length > 0) {
-              const lastWord = words[words.length - 1];
-              if (lastWord === 'CS') {
-                csCount.push(words[0]);
-              } else if (lastWord === 'SWE') {
-                sweCount.push(words[0]);
+            const sweCount = [];
+            const csCount = [];
+            const lines = data.split('\n').slice(1);
+            for (let i = 0; i < lines.length; i += 1) {
+              const line = lines[i].trim();
+              const words = line.split(',');
+              if (words.length > 0) {
+                const lastWord = words[words.length - 1];
+                if (lastWord === 'CS') {
+                  csCount.push(words[0]);
+                } else if (lastWord === 'SWE') {
+                  sweCount.push(words[0]);
+               }
               }
             }
+            const totalStudents = sweCount.length + csCount.length;
+            res.write(`Number of students: ${totalStudents}\n`);
+            if (csCount.length > 0) {
+              res.write(`Number of students in CS: ${csCount.length}. List: ${csCount.join(', ')}\n`);
+            }
+            if (sweCount.length > 0) {
+              res.write(`Number of students in SWE: ${sweCount.length}. List: ${sweCount.join(', ')}`);
+            }
+            res.end();
           }
-          const totalStudents = sweCount.length + csCount.length;
-          res.write(`Number of students: ${totalStudents}\n`);
-          if (csCount.length > 0) {
-            res.write(`Number of students in CS: ${csCount.length}. List: ${csCount.join(', ')}\n`);
-          }
-          if (sweCount.length > 0) {
-            res.write(`Number of students in SWE: ${sweCount.length}. List: ${sweCount.join(', ')}`);
-          }
-          res.end();
-      }
-    });
-  }
+      });
+    }
 });
 
 app.listen(port, hostname, () => {
