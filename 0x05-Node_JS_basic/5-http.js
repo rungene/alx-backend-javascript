@@ -10,13 +10,18 @@ const app = http.createServer((req, res) => {
   if (req.method === 'GET') {
     if (req.url === '/') {
       res.statusCode = 200;
-      res.end('Hello Holberton School!\n'); // Add '\n' for newline
+      res.end('Hello Holberton School!');
     } else if (req.url === '/students') {
       res.write('This is the list of our students\n');
+      if (!process.argv[2]) {
+        res.statusCode = 500;
+        res.end('File path not provided');
+        return;
+      }
       fs.readFile(process.argv[2], 'utf-8', (err, data) => {
         if (err) {
           res.statusCode = 500;
-          res.end('Cannot load the database\n'); // Add '\n' for newline
+          res.end('Cannot load the database');
         } else {
           res.statusCode = 200;
           const sweCount = [];
@@ -35,12 +40,12 @@ const app = http.createServer((req, res) => {
             }
           }
           const totalStudents = sweCount.length + csCount.length;
-          res.write(`Number of students: ${totalStudents}\n`); // Add '\n' for newline
+          res.write(`Number of students: ${totalStudents}\n`);
           if (csCount.length > 0) {
-            res.write(`Number of students in CS: ${csCount.length}. List: ${csCount.join(', ')}\n`); // Add '\n' for newline
+            res.write(`Number of students in CS: ${csCount.length}. List: ${csCount.join(', ')}\n`);
           }
           if (sweCount.length > 0) {
-            res.write(`Number of students in SWE: ${sweCount.length}. List: ${sweCount.join(', ')}\n`); // Add '\n' for newline
+            res.write(`Number of students in SWE: ${sweCount.length}. List: ${sweCount.join(', ')}`);
           }
           res.end();
         }
