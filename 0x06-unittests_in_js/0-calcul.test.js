@@ -2,32 +2,14 @@ const assert = require('assert');
 const calculateNumber = require('./0-calcul');
 
 describe('calculateNumber', function() {
-  it('should round and sum positive numbers correctly', function() {
-    const result = calculateNumber(1, 3);
-    assert.strictEqual(result, 4);
-  });
-  it('should round and sum positive numbers correctly, one flaot', function() {
-    const result = calculateNumber(1, 3.7);
-    assert.strictEqual(result, 5);
-  });
-  it('should round and sum positive numbers correctly, 2 floats', function() {
-    const result = calculateNumber(1.2, 3.7);
-    assert.strictEqual(result, 5);
-  });
-  it('should round and sum positive numbers correctly, 3 floats', function() {
-    const result = calculateNumber(1.5, 3.7);
-    assert.strictEqual(result, 6);
-  });
-  it('should round and sum positive numbers correctly, 3 floats', function() {
-    const result = calculateNumber(-1, -2);
-    assert.strictEqual(result, -3);
-  });
-  it('should round and sum positive numbers correctly, 3 floats', function() {
-    const result = calculateNumber(1, -2);
-    assert.strictEqual(result, -1);
-  });
-  it('should round and sum positive numbers correctly, 3 floats', function() {
-    const result = calculateNumber(1000, 3000);
-    assert.strictEqual(result, 4000);
-  });
+  const testCalculateNumber = ({a, b, expected}) => function () {
+    const result = calculateNumber(a, b);
+    assert.equal(result, expected);
+  };
+  it('Adds 1 and 3 correctly', testCalculateNumber({a: 1, b: 3, expected: 4}));
+  it('Adds 1 and 3.7 correctly', testCalculateNumber({a: 1, b: 3.7, expected: 5}));
+  it('Adds 1.2 and 3.7 correctly', testCalculateNumber({a: 1.2, b: 3.7, expected: 5}));
+  it('Adds 1.5 and 3.7 correctly', testCalculateNumber({a: 1.5, b: 3.7, expected: 6}));
+  it('Adds -1 and -3 correctly', testCalculateNumber({a: -1, b: -3, expected: -4}));
+  it('Adds 2000 and 3000 correctly', testCalculateNumber({a: 2000, b: 3000, expected: 5000}));
 });
