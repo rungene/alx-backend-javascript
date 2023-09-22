@@ -4,4 +4,4 @@ function calculateNumber(a, b) {
 
   return roundA + roundB;
 }
-module.exports = calculateNumber
+module.exports = calculateNumber;
