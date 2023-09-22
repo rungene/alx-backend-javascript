@@ -1,11 +1,10 @@
-const chai = require('chai');
-const assert = chai.assert;
+const { expect } = require('chai');
 const calculateNumber = require('./2-calcul_chai');
 
 describe('calculateNumber', function() {
   const testCalculateNumber = ({type, a, b, expected}) => function () {
     const result = calculateNumber(type, a, b);
-    assert.equal(result, expected);
+    expect(result).to.equal(expected);
   };
   it('Adds 1 and 3 correctly', testCalculateNumber({type: 'SUM', a: 1, b: 3, expected: 4}));
   it('Adds 1.4 and 4.5 correctly', testCalculateNumber({type: 'SUM', a: 1.4, b: 4.5, expected: 6}));
