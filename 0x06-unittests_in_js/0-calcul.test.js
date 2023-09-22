@@ -18,4 +18,16 @@ describe('calculateNumber', function() {
     const result = calculateNumber(1.5, 3.7);
     assert.strictEqual(result, 6);
   });
+  it('should round and sum positive numbers correctly, 3 floats', function() {
+    const result = calculateNumber(-1, -2);
+    assert.strictEqual(result, -3);
+  });
+  it('should round and sum positive numbers correctly, 3 floats', function() {
+    const result = calculateNumber(1, -2);
+    assert.strictEqual(result, -1);
+  });
+  it('should round and sum positive numbers correctly, 3 floats', function() {
+    const result = calculateNumber(1000, 3000);
+    assert.strictEqual(result, 4000);
+  });
 });
